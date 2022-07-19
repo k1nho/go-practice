@@ -11,10 +11,13 @@ func main() {
 	log.SetPrefix("greetings: ")
 	log.SetFlags(0)
 
-	message, err := greetings.Hello("Kin")
+	// Defining slice of names to be used
+	names := []string{"Kin", "John Doe", "Alice Bobber"}
+
+	messages, err := greetings.HelloToAll(names)
 
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(message)
+	fmt.Println(messages)
 }
