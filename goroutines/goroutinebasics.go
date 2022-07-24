@@ -12,6 +12,11 @@ type Point struct {
 	Y int
 }
 
+type PointCollection struct {
+	p1 *Point
+	p2 *Point
+}
+
 // Receivers (getters)
 func (p Point) Diff() int {
 	res := p.X - p.Y
@@ -22,6 +27,15 @@ func (p Point) Diff() int {
 func (p *Point) Scale(factor int) {
 	p.X = p.X * factor
 	p.Y = p.Y * factor
+}
+
+// Interfaces (collections of methods)
+type PointMath interface {
+	Slope() float64
+}
+
+func (p PointCollection) Slope() int {
+	return (p.p2.Y - p.p1.Y) / (p.p2.X - p.p1.X)
 }
 
 func push(name string, ch chan string) {
@@ -47,6 +61,7 @@ func main() {
 
 	fmt.Println("Defining  a point")
 	p := Point{X: 2, Y: 2}
+	p2 := Point{X: 12, Y: 6}
 	fmt.Printf("The x coordinate is %v and the y coordinate is %v\n", p.X, p.Y)
 	p.X = 5
 	fmt.Printf("Changing the code to assign x to a %v\n", p.X)
@@ -55,6 +70,8 @@ func main() {
 	fmt.Printf("Difference between x and y is %v\n", diff)
 	p.Scale(2)
 	fmt.Printf("Doubling our coordinates we have x: %v, y: %v\n", p.X, p.Y)
+	pCollection := PointCollection{p1: &p, p2: &p2}
+	fmt.Printf(" Using point collection struct to get slope %v\n", pCollection.Slope())
 
 }
 
