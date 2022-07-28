@@ -43,4 +43,7 @@ func main() {
 	characterRouter.HandleFunc("/", getAllCharacters);
 	characterRouter.HandleFunc("/{id}", getCharacter);
 
+	// DB
+	// db, err:= sql.Open("mysql", "root:pw@(localhost:3306)/dbname")
+
 }
