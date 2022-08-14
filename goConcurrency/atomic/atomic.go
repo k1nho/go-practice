@@ -1,6 +1,5 @@
 // we can use atomic for some cases instead of mutex
-
-package main
+package atomic
 
 import (
 	"fmt"
@@ -29,3 +28,5 @@ func increaseCount(wg *sync.WaitGroup) {
 	atomic.AddInt32(&count, 1)
 	wg.Done()
 }
+
+main()
