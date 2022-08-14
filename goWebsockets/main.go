@@ -12,8 +12,8 @@ var upgrader = websocket.Upgrader{
 }
 
 func main() {
-	http.HandleFunc("echo", func(w http.ResponseWriter, r *http.Request) {
-		conn, _ = upgrader.Upgrade(w, r, nil)
+	http.HandleFunc("/echo", func(w http.ResponseWriter, r *http.Request) {
+		conn, _ := upgrader.Upgrade(w, r, nil)
 
 		for {
 			// read message
@@ -24,7 +24,7 @@ func main() {
 
 			fmt.Println("%s sent: %s \n", conn.RemoteAddr(), string(msg))
 
-			if err = conn.WriterMessage(msgType, msg); err != nil {
+			if err = conn.WriteMessage(msgType, msg); err != nil {
 				return
 			}
 		}
@@ -34,5 +34,5 @@ func main() {
 		http.ServeFile(w, r, "index.html")
 	})
 
-	http.ServeAndListen(":8000", nil)
+	http.ListenAndServe(":8000", nil)
 }
