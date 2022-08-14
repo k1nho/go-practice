@@ -12,21 +12,21 @@
 	<pre id="output"></pre>
 
 	<script>
-		var input = document.getElementById("input")
-		var output = document.getElementById("output")
-		var socket = new WebSocket("ws://localhost:8000/echo")
+		var input = document.getElementById("input");
+		var output = document.getElementById("output");
+		var socket = new WebSocket("ws://localhost:8000/echo");
 
 		socket.onopen = () => {
-			output.innerHTML += "Status: Connected\n"
+			output.innerHTML += "Status: Connected\n";
 		}
 
-		socket.onmessage = (e) => {
-			output.innerHTML += "Server: " + e.data + "\n"
+		socket.onmessage = (e) =>  {
+			output.innerHTML += "Server: " + e.data + "\n";
 		}
 
 		function send(){
-			socket.send(input.value)
-			input.value = ""
+			socket.send(input.value);
+			input.value = "";
 		}
 	</script>
 </body>
