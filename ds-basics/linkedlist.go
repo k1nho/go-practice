@@ -27,7 +27,12 @@ func (l *LinkedList) add(x int){
 }
 
 func (l *LinkedList) get(x int) *Node{
-
+	for it := l.head; it.next != nil; it = it.next{
+		if it.val == x {
+			return it
+		}
+	}	
+	return nil
 }
 
 func (l LinkedList) remove(x int){
@@ -36,11 +41,22 @@ func (l LinkedList) remove(x int){
 
 
 func (l LinkedList) String() string{
+	sb := strings.Builder{}
 
+	for it := l.head; it.next != nil; it = it.next{
+		sb.WriteString(fmt.Sprintf("%d ", it.val))
+	}
+
+	return sb.String()
 
 }
 
 
-func main() [
+func main() {
+	LL := LinkedList{}
+	LL.add(1)
+	LL.add(2)
+	LL.add(3)
+	LL.add(4)
 
-]
+}
