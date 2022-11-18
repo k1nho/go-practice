@@ -23,6 +23,11 @@ type Triangle struct {
   A, B, C int
 }
 
+// implemeting print for rectangle
+func (r Rectangle) String() string {
+  return fmt.Sprintf("Rectangle: [width: %d, height: %d]", r.width, r.height)
+}
+
 // implement interface
 func (r Rectangle) Area() {
   fmt.Printf( "area %d",  r.width*r.height)
@@ -48,4 +53,10 @@ func main() {
   shape= Rectangle{10,4}
   shape.Area()
   checkType(shape)
+
+  // the empty interface specifies 0 methods is known as the empty interface (it may hold any type)
+
+  // Stringer interface is used to implement print of values to strings
+  rect := Rectangle{10,40}
+  fmt.Println(rect)
 }
