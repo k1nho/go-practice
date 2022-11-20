@@ -3,11 +3,11 @@ package main
 import "fmt"
 
 
-//type Constraint interface {
-  //int | bool
-//}
+type Constraint interface {
+ int | bool
+}
 
-type List[T any] struct {
+type List[T Constraint] struct {
   next *List[T]
   val T
 }
@@ -38,4 +38,15 @@ func main() {
 
   linkedList.Print()
 
+  // The following will fail since we contraint our generic to be only int or bool
+  //stringList := List[string]{nil, "5"}
+
+  boolList := List[bool]{nil, true}
+  boolList.Add(List[bool]{nil, false})
+  boolList.Add(List[bool]{nil, true})
+  boolList.Add(List[bool]{nil, true})
+  boolList.Add(List[bool]{nil, true})
+  boolList.Add(List[bool]{nil, false})
+
+  boolList.Print()
 }
