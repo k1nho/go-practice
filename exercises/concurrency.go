@@ -64,6 +64,39 @@ func Walk(t *Tree, ch chan int) {
   Walk(t.Right, ch)
 }
 
+// Same determines whether the trees
+// t1 and t2 contain the same values.
+func Same(t1, t2 *Tree) bool {
+	cht1 := make(chan int)
+	cht2 := make(chan int)
+	
+	go func() {
+		Walk(t1, cht1)
+		close(cht1)
+	}()
+	
+	go func(){
+		Walk(t2, cht2)
+		close(cht2)
+	}()
+	
+	for {
+		v1, ok1 := <-cht1
+		v2, ok2 := <-cht2
+		
+		if ok1 != ok2 || v1 != v2 {
+			return false
+		}
+		
+		if !ok1 && !ok2 {
+			break
+		}
+	}
+	
+	return true
+	
+}
+
 
 // patterns
 
